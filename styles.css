@@ -4,7 +4,7 @@
     --rosa-hover: #C2006A;
     --lila-base: #C8A2C8;
     --lila-claro: #F4EAF4;
-    --fondo-principal: #FAFAFA;
+    --fondo-principal: #FFF0E6; /* <--- Fondo durazno/naranja suave */
     --texto-principal: #1A1A1A;
     --texto-secundario: #4A4A4A;
 }
@@ -32,7 +32,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 5%;
-    background-color: white;
+    background-color: white; /* Mantiene el contraste con el fondo durazno */
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     position: sticky;
     top: 0;
@@ -115,7 +115,7 @@ nav a:hover {
 }
 
 .art-card {
-    background: white;
+    background: white; /* Mantiene el contraste con el fondo durazno */
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(200, 162, 200, 0.2);
