@@ -4,12 +4,11 @@
     --rosa-hover: #C2006A;
     --lila-base: #C8A2C8;
     --lila-claro: #F4EAF4;
-    --fondo-principal: #FFF0E6; /* Fondo durazno/naranja suave */
+    --fondo-principal: #FFF0E6; 
     --texto-principal: #1A1A1A;
     --texto-secundario: #4A4A4A;
 }
 
-/* Comportamiento global */
 html {
     scroll-behavior: smooth;
 }
@@ -170,12 +169,71 @@ nav a:hover {
     border-top: 1px solid var(--lila-claro);
 }
 
-.seccion-proximamente p {
-    color: var(--texto-secundario);
-    margin-top: 1rem;
-}
-
 .fondo-lila {
     background-color: var(--lila-claro);
     border-top: none;
+}
+
+/* ESTILOS DEL MODAL (NUEVO) */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0,0,0,0.6);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--texto-secundario);
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: var(--rosa-mexicano);
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: var(--rosa-mexicano);
 }
