@@ -9,7 +9,11 @@ async function fetchAndRenderGallery() {
     const gallery = document.getElementById('gallery');
     gallery.innerHTML = '';
 
-    const { data: obras, error } = await supabase.from('obras').select('*');
+    // Pedimos los datos ordenados del más nuevo al más viejo
+    const { data: obras, error } = await supabase
+        .from('obras')
+        .select('*')
+        .order('id', { ascending: false });
 
     if (error) {
         console.error('Error:', error.message);
@@ -29,7 +33,6 @@ async function fetchAndRenderGallery() {
         const listaTags = obra.tags ? obra.tags.split(',').map(tag => tag.trim()) : [];
         const tagsHtml = listaTags.map(tag => `<span class="tag">${tag}</span>`).join('');
         
-        // Salvavidas: Busca la imagen ya sea en la columna "imagen_url" o "imagen"
         const urlImagen = obra.imagen_url || obra.imagen || '';
 
         card.innerHTML = `
@@ -45,14 +48,64 @@ async function fetchAndRenderGallery() {
     });
 }
 
-// 3. INICIALIZADOR GLOBAL
+// 3. INICIALIZADOR Y LÓGICA DEL FORMULARIO
 document.addEventListener('DOMContentLoaded', () => {
     fetchAndRenderGallery();
 
+    // Elementos del DOM para el Modal
+    const modal = document.getElementById('modal-subir');
     const btnSubir = document.getElementById('btn-subir');
+    const spanClose = document.querySelector('.close-btn');
+    const formObra = document.getElementById('form-obra');
+
+    // Abrir el modal
     if (btnSubir) {
         btnSubir.addEventListener('click', () => {
-            alert('¡Conexión exitosa! Ya leemos datos de Supabase.');
+            modal.style.display = 'flex';
+        });
+    }
+
+    // Cerrar el modal con la X
+    if (spanClose) {
+        spanClose.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+    }
+
+    // Cerrar el modal al hacer clic afuera
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    // Enviar datos a Supabase
+    if (formObra) {
+        formObra.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Evita que la página se recargue sola
+            
+            // Extraemos los valores de los inputs
+            const titulo = document.getElementById('titulo').value;
+            const artista = document.getElementById('artista').value;
+            const imagen_url = document.getElementById('imagen_url').value;
+            const tags = document.getElementById('tags').value;
+
+            // Insertamos en la tabla 'obras'
+            const { data, error } = await supabase
+                .from('obras')
+                .insert([
+                    { titulo: titulo, artista: artista, imagen_url: imagen_url, tags: tags }
+                ]);
+
+            if (error) {
+                alert('Hubo un error al subir la obra: ' + error.message);
+                console.error(error);
+            } else {
+                // Éxito: cerramos modal, limpiamos formulario y recargamos galería
+                modal.style.display = 'none';
+                formObra.reset();
+                fetchAndRenderGallery();
+            }
         });
     }
 });
