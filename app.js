@@ -1,44 +1,50 @@
-// Datos mock de obras de arte
-const obras = [
-    {
-        titulo: "Cuadros fuera de campo",
-        artista: "Sofía & Ana",
-        imagen: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        tags: ["Cómic", "Blanco y Negro"]
-    },
-    {
-        titulo: "Perspectiva Urbana",
-        artista: "Daniela Ruiz",
-        imagen: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        tags: ["Fotografía", "Directora"]
-    },
-    {
-        titulo: "Síntesis Analógica",
-        artista: "Valeria M.",
-        imagen: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        tags: ["Diseño Sonoro", "Visuales"]
-    },
-    {
-        titulo: "Identidad",
-        artista: "Colectivo FAV",
-        imagen: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        tags: ["Ilustración", "Mixto"]
-    }
-];
+// 1. CONFIGURACIÓN DE SUPABASE
+const SUPABASE_URL = "https://hlfttshebgjbgjpuqryg.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_ojoBDinCJlODvqObA_H_7g_uCYsLGHV";
 
-// Función para renderizar la galería
-function renderGallery() {
+// Inicializamos el cliente de Supabase
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// 2. FUNCIÓN PARA CONSULTAR Y RENDERIZAR LA GALERÍA
+async function fetchAndRenderGallery() {
     const gallery = document.getElementById('gallery');
     
+    // Limpiamos el contenedor por si acaso
+    gallery.innerHTML = '';
+
+    // Hacemos la petición a la tabla 'obras'
+    const { data: obras, error } = await supabase
+        .from('obras')
+        .select('*');
+
+    if (error) {
+        console.error('Error cargando los datos de Supabase:', error.message);
+        gallery.innerHTML = '<p>Error al cargar la galería. Por favor, intenta más tarde.</p>';
+        return;
+    }
+
+    // Si la tabla está vacía, mostramos un mensaje amigable
+    if (!obras || obras.length === 0) {
+        gallery.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--texto-secundario);">Aún no hay obras publicadas. ¡Sé la primera!</p>';
+        return;
+    }
+
+    // Iteramos sobre las obras reales traídas de la base de datos
     obras.forEach(obra => {
         const card = document.createElement('div');
         card.className = 'art-card';
         
-        // Generar etiquetas HTML
-        const tagsHtml = obra.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+        // Manejo de tags: si en la base de datos se guardó como texto separado por comas (ej: "Diseño, Cine"),
+        // lo convertimos a un arreglo para poder mapearlo correctamente.
+        const listaTags = obra.tags 
+            ? obra.tags.split(',').map(tag => tag.trim()) 
+            : [];
+            
+        const tagsHtml = listaTags.map(tag => `<span class="tag">${tag}</span>`).join('');
 
+        // Nota: mapeamos 'imagen_url' que es el nombre que le dimos a la columna en la base de datos
         card.innerHTML = `
-            <img src="${obra.imagen}" alt="${obra.titulo}" class="img-placeholder">
+            <img src="${obra.imagen_url}" alt="${obra.titulo}" class="img-placeholder">
             <div class="card-info">
                 <h3>${obra.titulo}</h3>
                 <div class="artist">Por ${obra.artista}</div>
@@ -52,17 +58,16 @@ function renderGallery() {
     });
 }
 
-// Inicializar cuando el DOM esté listo
+// 3. INICIALIZADOR GLOBAL
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Renderizamos las tarjetas de la galería
-    renderGallery();
+    // Ejecutamos la carga dinámica desde la base de datos
+    fetchAndRenderGallery();
 
-    // 2. Lógica interactiva del botón "Sube tu obra"
+    // Lógica interactiva del botón "Sube tu obra"
     const btnSubir = document.getElementById('btn-subir');
-    
     if (btnSubir) {
         btnSubir.addEventListener('click', () => {
-            alert('¡Hola! Por ahora estamos en versión de prueba. Pronto habilitaremos el formulario para que subas tu portafolio a nuestra base de datos.');
+            alert('¡Conexión exitosa! Ya leemos datos de Supabase. El siguiente paso será construir el formulario interactivo para que puedas subir obras directamente desde aquí.');
         });
     }
 });
