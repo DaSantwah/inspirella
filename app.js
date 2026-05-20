@@ -2,15 +2,16 @@
 const SUPABASE_URL = "https://hlfttshebgjbgjpuqryg.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_ojoBDinCJlODvqObA_H_7g_uCYsLGHV";
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// ¡Aquí estaba el error! Le cambiamos el nombre a clienteSupabase para que no choque
+const clienteSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // 2. FUNCIÓN PARA CONSULTAR Y RENDERIZAR LA GALERÍA
 async function fetchAndRenderGallery() {
     const gallery = document.getElementById('gallery');
     gallery.innerHTML = '';
 
-    // Pedimos los datos ordenados del más nuevo al más viejo
-    const { data: obras, error } = await supabase
+    // Usamos clienteSupabase en lugar de supabase
+    const { data: obras, error } = await clienteSupabase
         .from('obras')
         .select('*')
         .order('id', { ascending: false });
@@ -90,8 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const imagen_url = document.getElementById('imagen_url').value;
             const tags = document.getElementById('tags').value;
 
-            // Insertamos en la tabla 'obras'
-            const { data, error } = await supabase
+            // Insertamos usando nuestra variable renombrada
+            const { data, error } = await clienteSupabase
                 .from('obras')
                 .insert([
                     { titulo: titulo, artista: artista, imagen_url: imagen_url, tags: tags }
