@@ -29,11 +29,11 @@ const obras = [
 // Función para renderizar la galería
 function renderGallery() {
     const gallery = document.getElementById('gallery');
-
+    
     obras.forEach(obra => {
         const card = document.createElement('div');
         card.className = 'art-card';
-
+        
         // Generar etiquetas HTML
         const tagsHtml = obra.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
 
@@ -47,7 +47,7 @@ function renderGallery() {
                 </div>
             </div>
         `;
-
+        
         gallery.appendChild(card);
     });
 }
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Lógica interactiva del botón "Sube tu obra"
     const btnSubir = document.getElementById('btn-subir');
-
+    
     if (btnSubir) {
         btnSubir.addEventListener('click', () => {
             alert('¡Hola! Por ahora estamos en versión de prueba. Pronto habilitaremos el formulario para que subas tu portafolio a nuestra base de datos.');
