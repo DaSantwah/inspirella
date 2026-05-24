@@ -1,0 +1,140 @@
+.loginContainer {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--fondo-principal);
+}
+
+.loginCard {
+  background: var(--blanco);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: var(--sombra-fuerte);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.loginCard h2 {
+  margin-bottom: 0.5rem;
+}
+
+.loginCard p {
+  color: var(--texto-secundario);
+  margin-bottom: 2rem;
+}
+
+.loginForm input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--lila-claro);
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.loginForm input:focus {
+  border-color: var(--rosa-mexicano);
+}
+
+/* Editor Container */
+.adminContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 5%;
+}
+
+.header {
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.header h1 {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  color: var(--texto-secundario);
+  font-size: 1.1rem;
+}
+
+.editorForm {
+  background: var(--blanco);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: var(--sombra-suave);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.formGroup, .formGroupFull {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroupFull {
+  margin-bottom: 2rem;
+}
+
+.editorForm label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.editorForm input, .editorForm select, .editorForm textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--lila-claro);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s;
+  background: var(--fondo-principal);
+}
+
+.editorForm input:focus, .editorForm select:focus, .editorForm textarea:focus {
+  border-color: var(--rosa-mexicano);
+  background: var(--blanco);
+  box-shadow: 0 0 0 3px rgba(228, 0, 124, 0.1);
+}
+
+.editorForm textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  border-top: 1px solid var(--lila-claro);
+  padding-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  .editorForm {
+    padding: 1.5rem;
+  }
+}

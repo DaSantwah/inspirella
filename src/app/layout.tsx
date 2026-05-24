@@ -51,6 +51,7 @@ export default function RootLayout({
               <Link href="/blog">Blog</Link>
               <Link href="/galeria">Galería</Link>
               <Link href="/comunidad">Comunidad</Link>
+              <Link href="/admin">Panel Admin</Link>
             </div>
             <div className={styles.footerSocial}>
               <h3>Síguenos</h3>
