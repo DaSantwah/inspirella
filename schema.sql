@@ -47,6 +47,12 @@ CREATE POLICY "Lectura pública de artworks" ON artworks FOR SELECT USING (true)
 -- Permitimos que los usuarios inserten comentarios de forma anónima
 CREATE POLICY "Inserción pública de comentarios" ON comments FOR INSERT WITH CHECK (true);
 
+-- Permitimos inserción de posts (para el panel admin sin auth compleja)
+CREATE POLICY "Inserción pública de posts" ON posts FOR INSERT WITH CHECK (true);
+
+-- Permitimos inserción de artworks (para futuro formulario)
+CREATE POLICY "Inserción pública de artworks" ON artworks FOR INSERT WITH CHECK (true);
+
 -- Insertar datos semilla (Mock Data)
 INSERT INTO posts (title, content, author_name, category, image_url) VALUES 
 ('La dirección de fotografía vista por mujeres', 'Un ensayo sobre las dificultades y avances de las mujeres detrás de la cámara...', 'Elena Torres', 'Ensayo', 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'),
