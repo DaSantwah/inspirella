@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspirella | Red de Creadoras</title>
+    
+    <!-- SEO & Open Graph -->
+    <meta name="description" content="Inspirella es una plataforma dedicada a la difusión del trabajo de mujeres artistas, cineastas, ilustradoras y diseñadoras.">
+    <meta property="og:title" content="Inspirella | Red de Creadoras">
+    <meta property="og:description" content="Un espacio seguro para crear, conectar y compartir arte.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://inspirella.art">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Boxicons for icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <a href="#">Inspirella<span>.</span></a>
+        </div>
+        <button class="mobile-menu-btn"><i class='bx bx-menu'></i></button>
+        <nav class="nav-links">
+            <a href="#galeria">Galería</a>
+            <a href="#directorio">Directorio</a>
+            <a href="#convocatorias">Convocatorias</a>
+            <button class="btn-primary" id="btn-subir">Sube tu obra <i class='bx bx-upload'></i></button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="inicio">
+            <div class="hero-content">
+                <span class="badge">Bienvenida a la comunidad</span>
+                <h1>Un espacio seguro para <span>crear y compartir</span>.</h1>
+                <p>Plataforma dedicada a la difusión y conexión del trabajo de mujeres artistas, cineastas, ilustradoras y diseñadoras.</p>
+                <div class="hero-buttons">
+                    <a href="#galeria" class="btn-primary btn-large">Explorar Galería</a>
+                    <a href="#directorio" class="btn-secondary btn-large">Ver Directorio</a>
+                </div>
+            </div>
+            <div class="hero-graphics">
+                <div class="blob blob-1"></div>
+                <div class="blob blob-2"></div>
+            </div>
+        </section>
+
+        <section class="gallery-section" id="galeria">
+            <div class="section-header">
+                <h2>Galería Destacada</h2>
+                <p>Descubre el talento de nuestra comunidad.</p>
+            </div>
+            
+            <div class="filters" id="gallery-filters">
+                <!-- Se llenarán por JS -->
+            </div>
+
+            <div class="gallery-grid" id="gallery">
+                <!-- Se llenarán por JS -->
+            </div>
+        </section>
+
+        <section id="directorio" class="directory-section">
+            <div class="section-header">
+                <h2>Directorio de Artistas</h2>
+                <p>Conecta con creadoras por disciplina y expande tu red.</p>
+            </div>
+            
+            <div class="search-bar">
+                <i class='bx bx-search'></i>
+                <input type="text" id="search-artist" placeholder="Buscar por nombre o disciplina...">
+            </div>
+
+            <div class="directory-grid" id="directory-container">
+                <!-- Se llenarán por JS -->
+            </div>
+        </section>
+
+        <section id="convocatorias" class="opportunities-section">
+            <div class="section-header text-white">
+                <h2>Convocatorias y Oportunidades</h2>
+                <p>Tablero de becas, exposiciones y proyectos vigentes.</p>
+            </div>
+            <div class="opportunities-grid" id="opportunities-container">
+                 <!-- Se llenarán por JS -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>Inspirella<span>.</span></h2>
+                <p>Impulsando el talento femenino en el arte y el diseño.</p>
+            </div>
+            <div class="footer-links">
+                <h3>Enlaces</h3>
+                <a href="#galeria">Galería</a>
+                <a href="#directorio">Directorio</a>
+                <a href="#convocatorias">Convocatorias</a>
+            </div>
+            <div class="footer-social">
+                <h3>Síguenos</h3>
+                <div class="social-icons">
+                    <a href="#"><i class='bx bxl-instagram'></i></a>
+                    <a href="#"><i class='bx bxl-twitter'></i></a>
+                    <a href="#"><i class='bx bxl-linkedin'></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Inspirella. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal para subir obra -->
+    <div class="modal-overlay" id="upload-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="close-modal"><i class='bx bx-x'></i></button>
+            <div class="modal-header">
+                <h2>Sube tu Portafolio</h2>
+                <p>Únete al directorio y muestra tu trabajo al mundo.</p>
+            </div>
+            <form class="upload-form" id="form-upload">
+                <div class="form-group">
+                    <label for="nombre">Nombre o Seudónimo</label>
+                    <input type="text" id="nombre" required placeholder="Ej. Ana García">
+                </div>
+                <div class="form-group">
+                    <label for="disciplina">Disciplina Principal</label>
+                    <select id="disciplina" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="ilustracion">Ilustración</option>
+                        <option value="cine">Cine & Video</option>
+                        <option value="fotografia">Fotografía</option>
+                        <option value="diseno">Diseño Gráfico</option>
+                        <option value="sonoro">Diseño Sonoro</option>
+                        <option value="mixto">Técnicas Mixtas</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="enlace">Enlace a tu portafolio (Behance, Instagram, Web)</label>
+                    <input type="url" id="enlace" required placeholder="https://...">
+                </div>
+                <button type="submit" class="btn-primary w-full">Enviar Solicitud</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
