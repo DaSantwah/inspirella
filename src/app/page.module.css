@@ -1,0 +1,241 @@
+/* page.module.css */
+.hero {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  padding: 2rem 5%;
+  background: var(--gradiente-hero);
+  position: relative;
+  overflow: hidden;
+}
+
+.heroContent {
+  flex: 1;
+  max-width: 650px;
+  position: relative;
+  z-index: 2;
+}
+
+.badge {
+  background: var(--lila-claro);
+  color: var(--rosa-mexicano);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.heroContent h1 {
+  font-size: 4rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--texto-principal);
+  letter-spacing: -1px;
+}
+
+.heroContent h1 span {
+  background: var(--gradiente-rosa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heroContent p {
+  font-size: 1.25rem;
+  color: var(--texto-secundario);
+  margin-bottom: 2.5rem;
+  max-width: 500px;
+}
+
+.heroButtons {
+  display: flex;
+  gap: 1rem;
+}
+
+.heroGraphics {
+  position: absolute;
+  right: -10%;
+  top: 10%;
+  width: 600px;
+  height: 600px;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+}
+
+.blob1 {
+  width: 400px;
+  height: 400px;
+  background: var(--lila-base);
+  top: 0;
+  right: 50px;
+  animation: float 8s ease-in-out infinite;
+}
+
+.blob2 {
+  width: 300px;
+  height: 300px;
+  background: rgba(228, 0, 124, 0.4);
+  bottom: 50px;
+  left: 50px;
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+.section {
+  padding: 6rem 5%;
+}
+
+.bgLila {
+  background-color: var(--lila-claro);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2.5rem;
+}
+
+/* Tarjeta Galeria */
+.card {
+  background: var(--fondo-tarjetas);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--sombra-suave);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--sombra-fuerte);
+}
+
+.imgWrapper {
+  overflow: hidden;
+  height: 280px;
+  position: relative;
+}
+
+.imgWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+.cardInfo {
+  padding: 1.5rem;
+}
+
+.cardInfo h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.2rem;
+}
+
+.artist {
+  color: var(--rosa-mexicano);
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background-color: var(--lila-claro);
+  color: var(--texto-secundario);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+}
+
+/* Tarjeta Blog */
+.postCard {
+  background: var(--blanco);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--sombra-suave);
+  transition: transform 0.3s;
+}
+
+.postCard:hover {
+  transform: translateY(-5px);
+}
+
+.postImgWrapper {
+  height: 220px;
+  overflow: hidden;
+}
+
+.postImgWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.postInfo {
+  padding: 1.5rem;
+}
+
+.category {
+  color: var(--rosa-mexicano);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.postInfo h3 a {
+  color: var(--texto-principal);
+  text-decoration: none;
+  font-size: 1.4rem;
+  transition: color 0.3s;
+}
+
+.postInfo h3 a:hover {
+  color: var(--rosa-mexicano);
+}
+
+.excerpt {
+  color: var(--texto-secundario);
+  margin: 1rem 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.postMeta {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--lila-claro);
+  padding-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--texto-secundario);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 4rem;
+  }
+  .heroContent h1 { font-size: 3rem; }
+  .heroGraphics { display: none; }
+  .heroButtons { flex-direction: column; }
+}
