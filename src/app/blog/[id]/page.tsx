@@ -48,7 +48,7 @@ export default async function BlogPost({ params }: { params: { id: string } }) {
       )}
 
       <div className={styles.content}>
-        {post.content.split('\n').map((paragraph: string, i: number) => (
+        {post.content.split('\n').filter((p: string) => p.trim() !== '').map((paragraph: string, i: number) => (
           <p key={i}>{paragraph}</p>
         ))}
       </div>

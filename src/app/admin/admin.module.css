@@ -49,6 +49,58 @@
   padding: 4rem 5%;
 }
 
+/* Tabs container */
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.tab {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.tabActive {
+  background: var(--primary-accent);
+  color: white;
+  border: 1px solid var(--primary-accent);
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(255, 62, 108, 0.3);
+}
+
+/* Glass form wrapper */
+.formCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 24px;
+  padding: 3rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
 .header {
   margin-bottom: 3rem;
   display: flex;
@@ -71,6 +123,9 @@
 }
 
 .editorForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   background: var(--blanco);
   padding: 3rem;
   border-radius: 20px;
@@ -122,12 +177,39 @@
   line-height: 1.6;
 }
 
+.hiddenFileInput {
+  display: none;
+}
+
+.fileUploadArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.2);
+  border: 2px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.fileUploadArea:hover {
+  border-color: var(--primary-accent);
+  background: rgba(255, 62, 108, 0.05);
+  color: white;
+}
+
 .formActions {
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
-  border-top: 1px solid var(--lila-claro);
+  margin-top: 1rem;
   padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 @media (max-width: 768px) {
