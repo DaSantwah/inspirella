@@ -3,16 +3,17 @@
 import { useState, useRef } from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
-import styles from "../../admin/admin.module.css";
-import { Edit3, CheckCircle, Upload } from "lucide-react";
+import styles from "../admin/admin.module.css";
+import { CheckCircle, Upload } from "lucide-react";
 
-export default function NuevoArticuloPage() {
-  const [title, setTitle] = useState("");
-  const [authorName, setAuthorName] = useState("");
-  const [category, setCategory] = useState("Ensayo");
-  const [content, setContent] = useState("");
+export default function SubirObraPage() {
+  const [artTitle, setArtTitle] = useState("");
+  const [artistName, setArtistName] = useState("");
+  const [discipline, setDiscipline] = useState("Ilustración");
+  const [tags, setTags] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
   const fileInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
@@ -37,35 +38,37 @@ export default function NuevoArticuloPage() {
     return publicUrl;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmitArt = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      let finalImageUrl = null;
-      if (selectedFile) {
-        finalImageUrl = await uploadImage(selectedFile);
+      if (!selectedFile) {
+        throw new Error("Por favor, selecciona una imagen para subir tu obra.");
       }
 
+      const finalImageUrl = await uploadImage(selectedFile);
+      const tagsArray = tags.split(',').map(t => t.trim()).filter(t => t.length > 0);
+
       const { error } = await supabase
-        .from("posts")
+        .from("artworks")
         .insert([
           { 
-            title, 
-            author_name: authorName, 
-            category, 
+            title: artTitle, 
+            artist_name: artistName, 
+            discipline, 
             image_url: finalImageUrl, 
-            content 
+            tags: tagsArray 
           }
         ]);
 
       if (error) throw error;
 
-      alert("¡Artículo publicado con éxito! Gracias por compartir tu voz.");
-      router.push("/blog");
+      alert("¡Obra de arte subida con éxito!");
+      router.push("/galeria");
       router.refresh();
     } catch (err: any) {
-      alert("Error al publicar: " + err.message);
+      alert("Error al subir obra: " + err.message);
     } finally {
       setIsSubmitting(false);
     }
@@ -74,56 +77,65 @@ export default function NuevoArticuloPage() {
   return (
     <div className={styles.adminContainer} style={{ paddingTop: "8rem" }}>
       <div className={styles.header}>
-        <h1>Comparte tu Voz</h1>
-        <p>Escribe y publica tu propio artículo para la comunidad de Inspirella.</p>
+        <h1>Sube tu Obra</h1>
+        <p>Comparte tu talento con la comunidad Inspirella y el mundo.</p>
       </div>
 
       <div className={styles.formCard}>
-        <form onSubmit={handleSubmit} className={styles.editorForm}>
+        <form onSubmit={handleSubmitArt} className={styles.editorForm}>
           <div className={styles.formGrid}>
             <div className={styles.formGroup}>
-              <label>Título del Artículo *</label>
+              <label>Título de la Obra *</label>
               <input 
                 type="text" 
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={artTitle}
+                onChange={(e) => setArtTitle(e.target.value)}
                 required 
-                placeholder="Ej. El color en el cine moderno"
+                placeholder="Ej. Perspectiva Urbana"
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label>Autora *</label>
+              <label>Tu Nombre o Seudónimo *</label>
               <input 
                 type="text" 
-                value={authorName}
-                onChange={(e) => setAuthorName(e.target.value)}
+                value={artistName}
+                onChange={(e) => setArtistName(e.target.value)}
                 required 
-                placeholder="Tu nombre completo"
+                placeholder="Ej. Daniela Ruiz"
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label>Categoría *</label>
-              <select value={category} onChange={(e) => setCategory(e.target.value)} required>
-                <option value="Ensayo">Ensayo</option>
-                <option value="Opinión">Opinión</option>
-                <option value="Entrevista">Entrevista</option>
-                <option value="Noticia">Noticia</option>
-                <option value="Reseña">Reseña</option>
-                <option value="Poesía">Poesía</option>
-                <option value="Cuento">Cuento</option>
+              <label>Disciplina *</label>
+              <select value={discipline} onChange={(e) => setDiscipline(e.target.value)} required>
+                <option value="Ilustración">Ilustración</option>
+                <option value="Fotografía">Fotografía</option>
+                <option value="Cine">Cine</option>
+                <option value="Pintura">Pintura</option>
+                <option value="Diseño Sonoro">Diseño Sonoro</option>
+                <option value="Animación">Animación</option>
               </select>
             </div>
 
             <div className={styles.formGroup}>
-              <label>Subir Foto de Portada (Opcional)</label>
+              <label>Etiquetas (separadas por comas)</label>
+              <input 
+                type="text" 
+                value={tags}
+                onChange={(e) => setTags(e.target.value)}
+                placeholder="Ej. Urbano, Analógico, Blanco y Negro"
+              />
+            </div>
+
+            <div className={styles.formGroupFull}>
+              <label>Subir Archivo de la Obra (Requerido) *</label>
               <div 
                 className={styles.fileUploadArea} 
                 onClick={() => fileInputRef.current?.click()}
               >
-                <Upload size={24} />
-                <span>{selectedFile ? selectedFile.name : "Haz clic para seleccionar archivo"}</span>
+                <Upload size={32} />
+                <span>{selectedFile ? selectedFile.name : "Haz clic para seleccionar tu arte (JPG, PNG, GIF)"}</span>
                 <input 
                   type="file" 
                   accept="image/*"
@@ -135,20 +147,9 @@ export default function NuevoArticuloPage() {
             </div>
           </div>
 
-          <div className={styles.formGroupFull}>
-            <label>Contenido del Artículo * (Soporta miles de palabras)</label>
-            <textarea 
-              rows={20}
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              required
-              placeholder="Escribe tu artículo aquí... Puedes escribir sin límite de palabras. Pulsa Enter para separar párrafos."
-            />
-          </div>
-
           <div className={styles.formActions}>
             <button type="submit" className="btn-primary" disabled={isSubmitting}>
-              {isSubmitting ? "Publicando..." : <><CheckCircle size={18} /> Publicar Artículo</>}
+              {isSubmitting ? "Subiendo Obra..." : <><CheckCircle size={18} /> Subir a Galería</>}
             </button>
           </div>
         </form>

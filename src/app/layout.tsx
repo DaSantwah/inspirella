@@ -30,9 +30,9 @@ export default function RootLayout({
             <Link href="/blog">Blog</Link>
             <Link href="/galeria">Galería</Link>
             <Link href="/comunidad">Comunidad</Link>
-            <button className="btn-primary" id="btn-subir">
+            <Link href="/subir-obra" className="btn-primary" id="btn-subir">
               Sube tu obra <Upload size={18} />
-            </button>
+            </Link>
           </nav>
         </header>
 

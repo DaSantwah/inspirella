@@ -1,44 +1,108 @@
-import Link from "next/link";
-import { supabase } from "@/lib/supabase";
-import styles from "../page.module.css"; // Reutilizamos estilos
+"use client";
 
-export default async function BlogPage() {
-  const { data: posts } = await supabase
-    .from('posts')
-    .select('*')
-    .order('created_at', { ascending: false });
+import { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabase";
+import styles from "./blog.module.css";
+import { Send } from "lucide-react";
+
+export default function BlogFeedPage() {
+  const [posts, setPosts] = useState<any[]>([]);
+  const [name, setName] = useState("");
+  const [content, setContent] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  const fetchPosts = async () => {
+    const { data } = await supabase
+      .from("posts")
+      .select("*")
+      .order("created_at", { ascending: false });
+    
+    if (data) {
+      setPosts(data);
+    }
+  };
+
+  const handlePost = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !content.trim()) return;
+    
+    setIsSubmitting(true);
+
+    const { data, error } = await supabase
+      .from("posts")
+      .insert([
+        {
+          title: `Pensamiento de ${name}`,
+          author_name: name,
+          content: content,
+          category: "Idea"
+        }
+      ])
+      .select();
+
+    setIsSubmitting(false);
+
+    if (!error && data) {
+      setPosts([data[0], ...posts]);
+      setContent("");
+    } else {
+      alert("Error al publicar la idea.");
+    }
+  };
 
   return (
-    <div style={{ padding: "6rem 5%", minHeight: "80vh" }}>
-      <div className="section-header">
-        <h2>Blog y Opinión</h2>
-        <p>Lee, reflexiona y debate con los artículos de la comunidad.</p>
-        <div style={{ marginTop: "2rem" }}>
-          <Link href="/blog/nuevo" className="btn-primary">
-            Escribe tu propio artículo
-          </Link>
-        </div>
+    <div className={styles.blogContainer}>
+      <div className={styles.header}>
+        <h2>Muro de la Comunidad</h2>
+        <p>Comparte tus ideas, pensamientos y conecta con otras creativas.</p>
       </div>
 
-      <div className={styles.grid}>
-        {posts?.map((post) => (
+      <div className={styles.composer}>
+        <form onSubmit={handlePost}>
+          <input 
+            type="text" 
+            placeholder="Tu Nombre o Seudónimo" 
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <textarea 
+            placeholder="¿Qué estás pensando? Comparte una idea o reflexión..." 
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            required
+          />
+          <div className={styles.composerActions}>
+            <button type="submit" className="btn-primary" disabled={isSubmitting}>
+              {isSubmitting ? "Publicando..." : <><Send size={16} /> Publicar</>}
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div className={styles.feed}>
+        {posts.map((post) => (
           <div key={post.id} className={styles.postCard}>
-            <div className={styles.postImgWrapper}>
-              <img src={post.image_url || 'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'} alt={post.title} />
-            </div>
-            <div className={styles.postInfo}>
-              <span className={styles.category}>{post.category}</span>
-              <h3><Link href={`/blog/${post.id}`}>{post.title}</Link></h3>
-              <p className={styles.excerpt}>{post.content.substring(0, 100)}...</p>
-              <div className={styles.postMeta}>
-                <span>Por {post.author_name}</span>
-                <span>{new Date(post.created_at).toLocaleDateString()}</span>
+            <div className={styles.postHeader}>
+              <div className={styles.avatar}>
+                {post.author_name.charAt(0).toUpperCase()}
               </div>
+              <div className={styles.postMeta}>
+                <h3>{post.author_name}</h3>
+                <span>{new Date(post.created_at).toLocaleString()}</span>
+              </div>
+            </div>
+            <div className={styles.postContent}>
+              {post.content}
             </div>
           </div>
         ))}
-        {(!posts || posts.length === 0) && (
-          <p style={{ textAlign: "center", gridColumn: "1/-1" }}>No hay artículos publicados todavía.</p>
+        {posts.length === 0 && (
+          <p style={{ textAlign: "center", color: "var(--text-muted)" }}>Sé la primera en compartir una idea.</p>
         )}
       </div>
     </div>
