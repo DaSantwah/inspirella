@@ -4,6 +4,7 @@ import "./globals.css";
 import Link from "next/link";
 import { Upload } from "lucide-react";
 import styles from "./layout.module.css";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
@@ -21,20 +22,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${inter.variable} ${outfit.variable}`}>
-        <header className={styles.navbar}>
-          <div className={styles.logo}>
-            <Link href="/">Inspir<span style={{ color: '#c8a2c8' }}>ella</span><span>.</span></Link>
-          </div>
-          <nav className={styles.navLinks}>
-            <Link href="/">Inicio</Link>
-            <Link href="/blog">Blog</Link>
-            <Link href="/galeria">Galería</Link>
-            <Link href="/comunidad">Comunidad</Link>
-            <Link href="/subir-obra" className="btn-primary" id="btn-subir">
-              Sube tu obra <Upload size={18} />
-            </Link>
-          </nav>
-        </header>
+        <Navbar />
 
         <main className={styles.mainContent}>
           {children}
