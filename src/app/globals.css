@@ -5,16 +5,16 @@
   --lila-base: #C8A2C8;
   --morado-profundo: #2A0A3A;
   --lila-claro: #F4EAF4;
-  --fondo-principal: #F8F9FA;
-  --fondo-tarjetas: #FFFFFF;
-  --texto-principal: #1A1A1A;
-  --texto-secundario: #5A5A5A;
+  --fondo-principal: #0A0510; /* Dark background */
+  --fondo-tarjetas: rgba(255, 255, 255, 0.03); /* Glassy dark cards */
+  --texto-principal: #F4EAF4;
+  --texto-secundario: #A098B0;
   --blanco: #FFFFFF;
   
   /* Gradientes */
-  --gradiente-hero: linear-gradient(135deg, var(--lila-claro) 0%, #FFFFFF 100%);
+  --gradiente-hero: linear-gradient(135deg, #1A0D23 0%, #0A0510 100%);
   --gradiente-rosa: linear-gradient(135deg, var(--rosa-mexicano) 0%, var(--rosa-vibrante) 100%);
-  --gradiente-oscuro: linear-gradient(135deg, var(--morado-profundo) 0%, #150520 100%);
+  --gradiente-oscuro: linear-gradient(135deg, var(--morado-profundo) 0%, #0A0510 100%);
   
   /* Sombras suaves */
   --sombra-suave: 0 10px 30px rgba(0, 0, 0, 0.05);

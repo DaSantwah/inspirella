@@ -4,14 +4,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 5%;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(10, 5, 16, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
 .logo a {
@@ -65,7 +65,8 @@
 
 /* Footer */
 .footer {
-  background: var(--blanco);
+  background: var(--fondo-principal);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
   padding: 4rem 5% 1rem 5%;
   margin-top: 4rem;
 }
@@ -120,8 +121,8 @@
 .socialIcons a {
   width: 40px;
   height: 40px;
-  background: var(--lila-claro);
-  color: var(--morado-profundo);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--texto-principal);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -139,7 +140,7 @@
 .footerBottom {
   text-align: center;
   padding-top: 2rem;
-  border-top: 1px solid var(--lila-claro);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--texto-secundario);
   font-size: 0.9rem;
 }

@@ -17,7 +17,7 @@
 }
 
 .badge {
-  background: var(--lila-claro);
+  background: rgba(255, 255, 255, 0.1);
   color: var(--rosa-mexicano);
   padding: 0.5rem 1rem;
   border-radius: 50px;
@@ -92,7 +92,7 @@
 }
 
 .bgLila {
-  background-color: var(--lila-claro);
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
 .grid {
@@ -156,7 +156,7 @@
 }
 
 .tag {
-  background-color: var(--lila-claro);
+  background-color: rgba(255, 255, 255, 0.1);
   color: var(--texto-secundario);
   font-size: 0.75rem;
   font-weight: 600;
@@ -166,7 +166,7 @@
 
 /* Tarjeta Blog */
 .postCard {
-  background: var(--blanco);
+  background: var(--fondo-tarjetas);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: var(--sombra-suave);
@@ -222,7 +222,7 @@
 .postMeta {
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid var(--lila-claro);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 1rem;
   font-size: 0.85rem;
   color: var(--texto-secundario);
