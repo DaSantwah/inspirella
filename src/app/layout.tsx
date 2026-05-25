@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${outfit.variable}`}>
         <header className={styles.navbar}>
           <div className={styles.logo}>
-            <Link href="/">Inspirella<span>.</span></Link>
+            <Link href="/">Inspir<span style={{ color: '#c8a2c8' }}>ella</span><span>.</span></Link>
           </div>
           <nav className={styles.navLinks}>
             <Link href="/">Inicio</Link>
@@ -43,7 +43,7 @@ export default function RootLayout({
         <footer className={styles.footer}>
           <div className={styles.footerContent}>
             <div className={styles.footerBrand}>
-              <h2>Inspirella<span>.</span></h2>
+              <h2>Inspir<span style={{ color: '#c8a2c8' }}>ella</span><span>.</span></h2>
               <p>Impulsando el talento femenino en el arte, diseño y la opinión crítica.</p>
             </div>
             <div className={styles.footerLinks}>
