@@ -301,14 +301,13 @@ export default function AdminPage() {
                 >
                   <Upload size={32} />
                   <span>{selectedFile ? selectedFile.name : "Haz clic para seleccionar tu arte (JPG, PNG, GIF)"}</span>
-                  <input 
-                    type="file" 
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    ref={fileInputRef}
-                    className={styles.hiddenFileInput}
-                    required
-                  />
+                    <input 
+                      type="file" 
+                      accept="image/*"
+                      onChange={handleFileChange}
+                      ref={fileInputRef}
+                      className={styles.hiddenFileInput}
+                    />
                 </div>
               </div>
             </div>

@@ -13,6 +13,11 @@ export default async function BlogPage() {
       <div className="section-header">
         <h2>Blog y Opinión</h2>
         <p>Lee, reflexiona y debate con los artículos de la comunidad.</p>
+        <div style={{ marginTop: "2rem" }}>
+          <Link href="/blog/nuevo" className="btn-primary">
+            Escribe tu propio artículo
+          </Link>
+        </div>
       </div>
 
       <div className={styles.grid}>
